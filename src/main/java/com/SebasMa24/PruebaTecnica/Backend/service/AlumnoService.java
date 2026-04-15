@@ -15,11 +15,7 @@ public class AlumnoService {
     AlumnoRepository alumnoRepository;
 
     public Alumno getAlumnoById(Long id) {
-        Optional<Alumno> Alumno = alumnoRepository.findById(id);
-        if(Alumno.isEmpty()) {
-            throw new IllegalArgumentException("Alumno no encontrado");
-        }
-        return Alumno.get();
+        return alumnoRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("Alumno no encontrado"));
     }
 
     public List<Alumno> getAllAlumnos() {

@@ -7,5 +7,5 @@ import com.SebasMa24.PruebaTecnica.Backend.model.Alumno;
 
 @Repository
 public interface AlumnoRepository extends JpaRepository<Alumno, Long> {
-    Boolean existsByEmail(String email);
+    public boolean existsByEmail(String email);
 }
