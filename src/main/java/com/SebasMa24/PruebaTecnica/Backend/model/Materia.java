@@ -9,6 +9,9 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Positive;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -25,14 +28,17 @@ public class Materia {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(nullable = false)
+    @NotBlank(message = "El nombre no puede ser nulo")
     private String nombre;
 
-    @Column(nullable = false, unique = true)
-    private Long codigo;
+    @Column(unique = true)
+    @NotNull(message = "El código no puede ser nulo")
+    @Positive(message = "El código debe ser positivo")
+    private Integer codigo;
 
-    @Column(nullable = false)
-    private int creditos;
+    @NotNull(message = "Los créditos no pueden ser nulos")
+    @Positive(message = "Los creditos deben ser positivos")
+    private Integer creditos;
 
     @OneToMany(mappedBy = "materia")
     private List<Nota> notas;
