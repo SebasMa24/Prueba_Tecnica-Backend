@@ -30,28 +30,21 @@ public class AlumnoService {
     }
 
     public Alumno updateAlumno(Long id, Alumno alumno) {
-        Optional<Alumno> existingAlumno = alumnoRepository.findById(id);
-        if(existingAlumno.isEmpty()) {
-            throw new IllegalArgumentException("Alumno no encontrado");
-        }
-        if(!alumno.getEmail().equals(existingAlumno.get().getEmail())
+        Alumno existingAlumno = alumnoRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("Alumno no encontrado"));
+        if(!alumno.getEmail().equals(existingAlumno.getEmail())
             && alumnoRepository.existsByEmail(alumno.getEmail())) {
             throw new IllegalArgumentException("El email ya se encuentra registrado");
         }
-        Alumno AlumnoToUpdate = existingAlumno.get();
-        AlumnoToUpdate.setNombre(alumno.getNombre());
-        AlumnoToUpdate.setApellido(alumno.getApellido());
-        AlumnoToUpdate.setEmail(alumno.getEmail());
-        AlumnoToUpdate.setFecha_nacimiento(alumno.getFecha_nacimiento());
-        return alumnoRepository.save(AlumnoToUpdate);
+        existingAlumno.setNombre(alumno.getNombre());
+        existingAlumno.setApellido(alumno.getApellido());
+        existingAlumno.setEmail(alumno.getEmail());
+        existingAlumno.setFecha_nacimiento(alumno.getFecha_nacimiento());
+        return alumnoRepository.save(existingAlumno);
     }
 
     public void deleteAlumno(Long id) {
-        Optional<Alumno> existingAlumno = alumnoRepository.findById(id);
-        if(existingAlumno.isEmpty()) {
-            throw new IllegalArgumentException("Alumno no encontrado");
-        }
-        alumnoRepository.deleteById(id);
+        Alumno existingAlumno = alumnoRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("Alumno no encontrado"));
+        alumnoRepository.delete(existingAlumno);
     }
     
 }
