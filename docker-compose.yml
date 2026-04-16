@@ -25,9 +25,10 @@ services:
     ports:
       - "${DB_PORT:-5432}:5432"
     environment:
-      - POSTGRES_DB=${DB_NAME:-mydb}
+      - POSTGRES_DB=${DB_NAME:-prueba_tecnica}
       - POSTGRES_USER=${DB_USER:-postgres}
-      - POSTGRES_PASSWORD=${DB_PASSWORD:-secret}
+      - POSTGRES_PASSWORD=${DB_PASSWORD:-postgres}
+      - CORS=${CORS:-http://localhost:5173}
     volumes:
       - postgres_data:/var/lib/postgresql/data
     healthcheck:

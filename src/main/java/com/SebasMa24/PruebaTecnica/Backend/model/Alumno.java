@@ -13,6 +13,7 @@ import jakarta.persistence.Table;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Past;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -42,6 +43,7 @@ public class Alumno {
 
     @Column(nullable = false)
     @NotNull(message = "La fecha de nacimiento no puede ser nula")
+    @Past(message = "La fecha de nacimiento debe estar en el pasado")
     private LocalDate fecha_nacimiento;
 
     @OneToMany(mappedBy = "alumno")

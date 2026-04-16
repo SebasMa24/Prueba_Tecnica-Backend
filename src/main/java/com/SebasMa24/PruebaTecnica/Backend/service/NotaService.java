@@ -1,5 +1,6 @@
 package com.SebasMa24.PruebaTecnica.Backend.service;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -35,7 +36,7 @@ public class NotaService {
 
         Nota nota = new Nota();
         nota.setValor(notaRequest.getValor());
-        nota.setFecha_registro(notaRequest.getFecha_registro());
+        nota.setFecha_registro(LocalDate.now());
         nota.setAlumno(alumno);
         nota.setMateria(materia);
         return notaRepository.save(nota);
